@@ -1,29 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ListaDeTarefas {
-    private ArrayList<Tarefa> tarefas;
-
-    public ListaDeTarefas() {
-        this.tarefas = new ArrayList<>();
-    }
-
-    public void adicionarTarefa(Tarefa tarefa) {
-        this.tarefas.add(tarefa);
-    }
-
-    public void removerTarefa(Tarefa tarefa) {
-        this.tarefas.remove(tarefa);
-    }
-
-    public void marcarTarefaConcluida(Tarefa tarefa) {
-        tarefa.setConcluida(true);
-    }
-
-    public ArrayList<Tarefa> getTarefas() {
-        return this.tarefas;
-    }
-
+public class Main {
     public static void main(String[] args) {
         ListaDeTarefas listaDeTarefas = new ListaDeTarefas();
         Scanner scanner = new Scanner(System.in);
@@ -78,4 +56,70 @@ public class ListaDeTarefas {
                     } else {
                         System.out.println("Todas as tarefas:");
                         for (int i = 0; i < tarefas.size(); i++) {
-                            Tarefa tarefaAtual = tarefas.get
+                            Tarefa tarefaAtual = tarefas.get(i);
+                            System.out.println((i + 1) + ". " + tarefaAtual.getNome() + " - " + tarefaAtual.getDescricao() + " - Concluída: " + tarefaAtual.isConcluida());
+                        }
+                    }
+                    break;
+                case 5:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        }
+    }
+}
+
+class Tarefa {
+    private String nome;
+    private String descricao;
+    private boolean concluida;
+
+    public Tarefa(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.concluida = false;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public boolean isConcluida() {
+        return concluida;
+    }
+
+    public void marcarComoConcluida() {
+        this.concluida = true;
+    }
+}
+
+class ListaDeTarefas {
+    private ArrayList<Tarefa> tarefas;
+
+    public ListaDeTarefas() {
+        this.tarefas = new ArrayList<Tarefa>();
+    }
+
+    public void adicionarTarefa(Tarefa tarefa) {
+        this.tarefas.add(tarefa);
+    }
+
+    public void removerTarefa(Tarefa tarefa) {
+        this.tarefas.remove(tarefa);
+    }
+
+    public void marcarTarefaConcluida(Tarefa tarefa) {
+        tarefa.marcarComoConcluida();
+    }
+
+    public ArrayList<Tarefa> getTarefas() {
+        return tarefas;
+    }
+}
